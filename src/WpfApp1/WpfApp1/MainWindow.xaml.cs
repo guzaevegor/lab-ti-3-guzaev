@@ -11,8 +11,9 @@ namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
-        private BigInteger p, q, n, phi, kc, ko;
-        private List<BigInteger> encryptedValues = new List<BigInteger>();
+        // Замена переменных в классе
+        private int p, q, n, phi, kc, ko;
+        private List<int> encryptedValues = new List<int>();
         private List<byte> decryptedValues = new List<byte>();
         // Буферы для хранения данных
         private byte[] sourceBytes;
@@ -27,9 +28,9 @@ namespace WpfApp1
 
         private void PTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (BigInteger.TryParse(PTextBox.Text, out BigInteger value))
+            if (int.TryParse(PTextBox.Text, out int value))
             {
-                if (IsPrimeMillerRabin(value, 5))
+                if (IsPrime(value))
                 {
                     p = value;
                     PValidationLabel.Content = "P является простым числом";
@@ -46,11 +47,12 @@ namespace WpfApp1
             }
         }
 
+
         private void QTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (BigInteger.TryParse(QTextBox.Text, out BigInteger value))
+            if (int.TryParse(QTextBox.Text, out int value))
             {
-                if (IsPrimeMillerRabin(value, 5))
+                if (IsPrime(value))
                 {
                     q = value;
                     QValidationLabel.Content = "Q является простым числом";
@@ -67,6 +69,7 @@ namespace WpfApp1
             }
         }
 
+
         private void KCTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (phi == 0)
@@ -75,14 +78,16 @@ namespace WpfApp1
                 return;
             }
 
-            if (BigInteger.TryParse(KCTextBox.Text, out BigInteger value))
+            if (int.TryParse(KCTextBox.Text, out int value))
             {
                 // KC должен быть взаимно простым с phi и меньше phi
-                if (value > 1 && value < phi && BigInteger.GreatestCommonDivisor(value, phi) == 1)
+                if (value > 1 && value < phi && FindGcd(value, phi) == 1)
                 {
                     kc = value;
                     // Вычисляем открытый ключ KO используя расширенный алгоритм Евклида
-                    ko = ModInverse(kc, phi);
+                    var extendedEuclidResult = ExtendedEuclidean(phi, kc);
+                    ko = extendedEuclidResult.y;
+
                     KCValidationLabel.Content = "KC является допустимым значением";
                     KOValueTextBlock.Text = ko.ToString();
 
@@ -100,171 +105,108 @@ namespace WpfApp1
                 KCValidationLabel.Content = "Введите целое число KC";
             }
         }
-
         private void UpdateCalculatedParameters()
         {
             if (p > 0 && q > 0)
             {
                 // Проверка на подходящий размер модуля для 8->16 бит
-                if (p * q > 65535)
+                if ((long)p * q > ushort.MaxValue)
                 {
                     AddToLog("Внимание: произведение P*Q > 65535. Зашифрованное значение может не влезть в 2 байта.");
                 }
 
-                n = p * q;
-                phi = (p - 1) * (q - 1);
+                try
+                {
+                    n = p * q;
+                    phi = (p - 1) * (q - 1);
 
-                NValueTextBlock.Text = n.ToString();
-                PhiValueTextBlock.Text = phi.ToString();
+                    NValueTextBlock.Text = n.ToString();
+                    PhiValueTextBlock.Text = phi.ToString();
 
-                AddToLog($"Вычислен модуль N = P * Q = {p} * {q} = {n}");
-                AddToLog($"Вычислена функция Эйлера φ(N) = (P-1) * (Q-1) = {p - 1} * {q - 1} = {phi}");
+                    AddToLog($"Вычислен модуль N = P * Q = {p} * {q} = {n}");
+                    AddToLog($"Вычислена функция Эйлера φ(N) = (P-1) * (Q-1) = {p - 1} * {q - 1} = {phi}");
 
-                // Сбрасываем ключи при изменении параметров
-                KCTextBox.Clear();
-                KOValueTextBlock.Text = "—";
+                    // Сбрасываем ключи при изменении параметров
+                    KCTextBox.Clear();
+                    KOValueTextBlock.Text = "—";
+                }
+                catch (OverflowException)
+                {
+                    MessageBox.Show("Произведение P и Q слишком большое для типа int. Используйте меньшие числа.",
+                                  "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    p = q = 0;
+                    NValueTextBlock.Text = "—";
+                    PhiValueTextBlock.Text = "—";
+                }
             }
         }
-
         #endregion
 
         #region Алгоритмы RSA
 
-        // Тест Миллера-Рабина для проверки на простоту
-        private bool IsPrimeMillerRabin(BigInteger n, int k)
+        private bool IsPrime(int number)
         {
-            // Простые случаи
-            if (n <= 1) return false;
-            if (n == 2 || n == 3) return true;
-            if (n % 2 == 0) return false;
+            if (number <= 1) return false;
+            if (number <= 3) return true;
+            if (number % 2 == 0 || number % 3 == 0) return false;
 
-            // Представляем n-1 в виде d * 2^s
-            BigInteger d = n - 1;
-            int s = 0;
-            while (d % 2 == 0)
+            for (int i = 5; i * i <= number; i += 6)
             {
-                d /= 2;
-                s++;
-            }
-
-            // Проводим k тестов
-            Random rand = new Random();
-            for (int i = 0; i < k; i++)
-            {
-                BigInteger a = RandomBigInteger(2, n - 2, rand);
-                BigInteger x = BigInteger.ModPow(a, d, n);
-
-                if (x == 1 || x == n - 1)
-                    continue;
-
-                bool isProbablePrime = false;
-                for (int r = 1; r < s; r++)
-                {
-                    x = BigInteger.ModPow(x, 2, n);
-                    if (x == 1)
-                        return false;
-                    if (x == n - 1)
-                    {
-                        isProbablePrime = true;
-                        break;
-                    }
-                }
-
-                if (!isProbablePrime)
+                if (number % i == 0 || number % (i + 2) == 0)
                     return false;
             }
 
             return true;
         }
 
-        // Генерация случайного BigInteger в диапазоне [min, max]
-        private BigInteger RandomBigInteger(BigInteger min, BigInteger max, Random random)
+        private int FindGcd(int a, int b) => b == 0 ? a : FindGcd(b, a % b);
+
+        private int QuickPowerMod(int num, int power, int mod)
         {
-            byte[] bytes = max.ToByteArray();
-            random.NextBytes(bytes);
-            bytes[bytes.Length - 1] &= 0x7F; // Убедимся, что число положительное
+            if (mod == 1) return 0;
+            if (power == 0) return 1;
+            if (num == 0) return 0;
 
-            BigInteger randomNumber = new BigInteger(bytes);
-            return min + (randomNumber % (max - min + 1));
-        }
-
-        // Расширенный алгоритм Евклида для нахождения мультипликативного обратного
-        private BigInteger ModInverse(BigInteger a, BigInteger m)
-        {
-            AddToLog("Запуск расширенного алгоритма Евклида:");
-
-            BigInteger m0 = m;
-            BigInteger y = 0, x = 1;
-
-            AddToLog($"Начальные значения: a = {a}, m = {m}, x = {x}, y = {y}");
-
-            if (m == 1)
-                return 0;
-
-            while (a > 1)
-            {
-                // Сохраняем текущие значения для логирования
-                BigInteger aOld = a;
-                BigInteger mOld = m;
-                BigInteger xOld = x;
-                BigInteger yOld = y;
-
-                // Находим частное и остаток
-                BigInteger q = a / m;
-                BigInteger t = m;
-
-                m = a % m;
-                a = t;
-                t = y;
-
-                y = x - q * y;
-                x = t;
-
-                AddToLog($"q = {aOld} / {mOld} = {q}, остаток = {m}");
-                AddToLog($"x' = {xOld}, y' = {yOld} => x = {t}, y = {xOld} - {q} * {yOld} = {y}");
-            }
-
-            if (x < 0)
-            {
-                x += m0;
-                AddToLog($"Отрицательное x, прибавляем модуль: {x - m0} + {m0} = {x}");
-            }
-
-            AddToLog($"Результат: мультипликативное обратное = {x}");
-            return x;
-        }
-
-        // Быстрое возведение в степень по модулю (для наглядности, можно использовать BigInteger.ModPow)
-        private BigInteger ModPow(BigInteger baseVal, BigInteger exponent, BigInteger modulus)
-        {
-            AddToLog($"Быстрое возведение в степень: {baseVal}^{exponent} mod {modulus}");
-
-            if (modulus == 1)
-                return 0;
-
-            BigInteger result = 1;
-            baseVal = baseVal % modulus;
+            int result = 1;
+            int current = num % mod;
+            int exponent = power;
 
             while (exponent > 0)
             {
-                // Если показатель нечетный
                 if (exponent % 2 == 1)
-                {
-                    result = (result * baseVal) % modulus;
-                    AddToLog($"  Показатель нечетный: result = (result * base) % modulus = {result}");
-                }
+                    result = (int)(((long)result * current) % mod);
 
-                // Сдвигаем показатель вправо (делим на 2)
-                exponent = exponent >> 1;
-                // Возводим основание в квадрат
-                baseVal = (baseVal * baseVal) % modulus;
-
-                if (exponent > 0)
-                    AddToLog($"  Основание в квадрат: base = {baseVal}, показатель = {exponent}");
+                current = (int)(((long)current * current) % mod);
+                exponent /= 2;
             }
 
-            AddToLog($"Результат: {result}");
             return result;
+        }
+
+        private (int gcd, int x, int y) ExtendedEuclidean(int a, int b)
+        {
+            int x0 = 1, y0 = 0, x1 = 0, y1 = 1;
+            int d0 = a, d1 = b;
+
+            while (d1 != 0)
+            {
+                int q = d0 / d1;
+                int d2 = d0 % d1;
+                int x2 = x0 - q * x1;
+                int y2 = y0 - q * y1;
+
+                d0 = d1;
+                d1 = d2;
+                x0 = x1;
+                x1 = x2;
+                y0 = y1;
+                y1 = y2;
+            }
+
+            if (y0 < 0)
+                y0 += a;
+
+            return (d0, x0, y0);
         }
 
         #endregion
@@ -310,17 +252,17 @@ namespace WpfApp1
                 for (int i = 0; i < sourceBytes.Length; i++)
                 {
                     byte b = sourceBytes[i];
-                    BigInteger m = b;
+                    int m = b;
 
                     // C = M^e mod n (шифрование с открытым ключом e=ko)
-                    BigInteger encrypted = ModPow(m, ko, n);
+                    int encrypted = QuickPowerMod(m, ko, n);
                     encryptedValues.Add(encrypted);
 
                     // Добавляем в результат
                     resultText.AppendLine($"{b} -> {encrypted}");
 
-                    // Преобразуем в 2 байта
-                    byte[] encBytes = BitConverter.GetBytes((ushort)(encrypted % 65536));
+                    // Преобразуем в 2 байта (ushort)
+                    byte[] encBytes = BitConverter.GetBytes((ushort)encrypted);
                     encryptedBytesList.Add(encBytes[0]);
                     encryptedBytesList.Add(encBytes[1]);
 
@@ -338,7 +280,7 @@ namespace WpfApp1
                 DataInfoTextBlock.Text = $"Исходных байт: {sourceBytes.Length} | Результат: {encryptedBytes.Length} байт";
 
                 AddToLog($"Шифрование завершено. Получено {encryptedValues.Count} зашифрованных значений.");
-                StatusTextBlock.Text = "Шифрование завершено успешно. Выберите 'Файл -> Сохранить результат' для сохранения.";
+                StatusTextBlock.Text = "Шифрование завершено успешно";
             }
             catch (Exception ex)
             {
@@ -350,6 +292,7 @@ namespace WpfApp1
                 OperationProgressBar.Value = 0;
             }
         }
+
 
 
         private void DecryptButton_Click(object sender, RoutedEventArgs e)
@@ -394,7 +337,7 @@ namespace WpfApp1
                     ushort encryptedValue = BitConverter.ToUInt16(encryptedBytes, i);
 
                     // M = C^d mod n (расшифровка с закрытым ключом d=kc)
-                    BigInteger decrypted = ModPow(encryptedValue, kc, n);
+                    int decrypted = QuickPowerMod(encryptedValue, kc, n);
 
                     // Убедимся, что результат - байт (0-255)
                     if (decrypted >= 0 && decrypted <= 255)
@@ -426,7 +369,7 @@ namespace WpfApp1
                 DataInfoTextBlock.Text = $"Зашифрованных байт: {encryptedBytes.Length} | Результат: {decryptedBytesList.Count} байт";
 
                 AddToLog($"Расшифровка завершена. Получено {decryptedBytesList.Count} расшифрованных байт.");
-                StatusTextBlock.Text = "Расшифровка завершена успешно. Выберите 'Файл -> Сохранить результат' для сохранения.";
+                StatusTextBlock.Text = "Расшифровка завершена успешно";
             }
             catch (Exception ex)
             {

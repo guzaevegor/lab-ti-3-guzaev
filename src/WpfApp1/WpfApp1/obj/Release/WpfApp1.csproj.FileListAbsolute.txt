@@ -37,3 +37,17 @@ H:\bsuir\4sem\ti\ТИ_2025\Задание №3_Крипт_с _открытым_�
 H:\bsuir\4sem\ti\ТИ_2025\Задание №3_Крипт_с _открытым_ключом\src\WpfApp1\WpfApp1\bin\Release\WpfApp1.exe.config
 H:\bsuir\4sem\ti\ТИ_2025\Задание №3_Крипт_с _открытым_ключом\src\WpfApp1\WpfApp1\bin\Release\WpfApp1.exe
 H:\bsuir\4sem\ti\ТИ_2025\Задание №3_Крипт_с _открытым_ключом\src\WpfApp1\WpfApp1\bin\Release\WpfApp1.pdb
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\bin\Release\WpfApp1.exe.config
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\bin\Release\WpfApp1.exe
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\bin\Release\WpfApp1.pdb
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.AssemblyReference.cache
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\MainWindow.baml
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\MainWindow.g.cs
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\App.g.cs
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1_MarkupCompile.cache
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.g.resources
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.Properties.Resources.resources
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.GenerateResource.cache
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.CoreCompileInputs.cache
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.exe
+H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.pdb
