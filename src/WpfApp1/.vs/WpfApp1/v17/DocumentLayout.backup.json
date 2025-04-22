@@ -1,0 +1,53 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "H:\\bsuir\\4sem\\ti\\\u0422\u0418_2025\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 \u21163_\u041A\u0440\u0438\u043F\u0442_\u0441 _\u043E\u0442\u043A\u0440\u044B\u0442\u044B\u043C_\u043A\u043B\u044E\u0447\u043E\u043C\\src\\WpfApp1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{D5ED3DEA-6F0E-42B2-B2BF-BFF266946ECB}|WpfApp1\\WpfApp1.csproj|H:\\bsuir\\4sem\\ti\\\u0422\u0418_2025\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 \u21163_\u041A\u0440\u0438\u043F\u0442_\u0441 _\u043E\u0442\u043A\u0440\u044B\u0442\u044B\u043C_\u043A\u043B\u044E\u0447\u043E\u043C\\src\\WpfApp1\\wpfapp1\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{D5ED3DEA-6F0E-42B2-B2BF-BFF266946ECB}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D5ED3DEA-6F0E-42B2-B2BF-BFF266946ECB}|WpfApp1\\WpfApp1.csproj|h:\\bsuir\\4sem\\ti\\\u0442\u0438_2025\\\u0437\u0430\u0434\u0430\u043D\u0438\u0435 \u21163_\u043A\u0440\u0438\u043F\u0442_\u0441 _\u043E\u0442\u043A\u0440\u044B\u0442\u044B\u043C_\u043A\u043B\u044E\u0447\u043E\u043C\\src\\wpfapp1\\wpfapp1\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D5ED3DEA-6F0E-42B2-B2BF-BFF266946ECB}|WpfApp1\\WpfApp1.csproj|solutionrelative:wpfapp1\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "H:\\bsuir\\4sem\\ti\\\u0422\u0418_2025\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 \u21163_\u041A\u0440\u0438\u043F\u0442_\u0441 _\u043E\u0442\u043A\u0440\u044B\u0442\u044B\u043C_\u043A\u043B\u044E\u0447\u043E\u043C\\src\\WpfApp1\\WpfApp1\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "WpfApp1\\MainWindow.xaml",
+              "ToolTip": "H:\\bsuir\\4sem\\ti\\\u0422\u0418_2025\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 \u21163_\u041A\u0440\u0438\u043F\u0442_\u0441 _\u043E\u0442\u043A\u0440\u044B\u0442\u044B\u043C_\u043A\u043B\u044E\u0447\u043E\u043C\\src\\WpfApp1\\WpfApp1\\MainWindow.xaml",
+              "RelativeToolTip": "WpfApp1\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-02-22T11:28:10.338Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "H:\\bsuir\\4sem\\ti\\\u0422\u0418_2025\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 \u21163_\u041A\u0440\u0438\u043F\u0442_\u0441 _\u043E\u0442\u043A\u0440\u044B\u0442\u044B\u043C_\u043A\u043B\u044E\u0447\u043E\u043C\\src\\WpfApp1\\WpfApp1\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "WpfApp1\\MainWindow.xaml.cs",
+              "ToolTip": "H:\\bsuir\\4sem\\ti\\\u0422\u0418_2025\\\u0417\u0430\u0434\u0430\u043D\u0438\u0435 \u21163_\u041A\u0440\u0438\u043F\u0442_\u0441 _\u043E\u0442\u043A\u0440\u044B\u0442\u044B\u043C_\u043A\u043B\u044E\u0447\u043E\u043C\\src\\WpfApp1\\WpfApp1\\MainWindow.xaml.cs",
+              "RelativeToolTip": "WpfApp1\\MainWindow.xaml.cs",
+              "ViewState": "AgIAAIYBAAAAAAAAAAAkwLgBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T17:01:04.792Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
