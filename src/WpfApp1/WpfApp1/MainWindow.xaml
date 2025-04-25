@@ -56,9 +56,9 @@
         <!-- Главное меню -->
         <Menu Grid.Row="0" Grid.ColumnSpan="2" FontFamily="Global User Interface" FontSize="14">
             <MenuItem Header="Файл" x:Name="FileMenu">
-                <MenuItem Header="Открыть" x:Name="OpenMenuItem"
-                          InputGestureText="Ctrl+O"
-                          Click="OpenMenuItem_Click"/>
+                <MenuItem Header="Открыть обычный файл" x:Name="OpenNormalMenuItem" Click="OpenMenuItem_Click" />
+                <MenuItem Header="Открыть файл с зашифрованным текстом" x:Name="OpenEncryptedMenuItem" Click="OpenMenuItem_Click" />
+
                 <MenuItem Header="Сохранить результат" x:Name="SaveMenuItem"
                           InputGestureText="Ctrl+S"
                           Click="SaveMenuItem_Click"/>

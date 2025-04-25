@@ -51,3 +51,17 @@ H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.Generate
 H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.CoreCompileInputs.cache
 H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.exe
 H:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.pdb
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\bin\Release\WpfApp1.exe.config
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\bin\Release\WpfApp1.exe
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\bin\Release\WpfApp1.pdb
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.AssemblyReference.cache
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\MainWindow.baml
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\MainWindow.g.cs
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\App.g.cs
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1_MarkupCompile.cache
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.g.resources
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.Properties.Resources.resources
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.GenerateResource.cache
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.CoreCompileInputs.cache
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.exe
+C:\bsuir\lab-ti-3-guzaev\src\WpfApp1\WpfApp1\obj\Release\WpfApp1.pdb

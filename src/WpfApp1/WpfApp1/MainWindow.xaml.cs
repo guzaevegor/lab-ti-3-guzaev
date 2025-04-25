@@ -11,7 +11,6 @@ namespace WpfApp1
 {
     public partial class MainWindow : Window
     {
-        // Замена переменных в классе
         private int p, q, n, phi, kc, ko;
         private List<int> encryptedValues = new List<int>();
         private List<byte> decryptedValues = new List<byte>();
@@ -113,6 +112,10 @@ namespace WpfApp1
                 if ((long)p * q > ushort.MaxValue)
                 {
                     AddToLog("Внимание: произведение P*Q > 65535. Зашифрованное значение может не влезть в 2 байта.");
+                }
+                if ((long)p * q < 255)
+                {
+                    AddToLog("Внимание: произведение P*Q < 255. Зашифрованное значение может быть декодированно корректно.");
                 }
 
                 try
@@ -398,10 +401,11 @@ namespace WpfApp1
             bool isEncryptMode = true; // По умолчанию режим шифрования
 
             // Если вызвано из кнопки "Открыть файл с зашифрованным текстом", меняем режим
-            if (sender is Button button && button.Content.ToString().Contains("зашифрованным"))
+            if (sender is MenuItem menuItem && menuItem.Header.ToString().Contains("зашифрованным"))
             {
                 isEncryptMode = false;
             }
+
 
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
